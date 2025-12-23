@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Elements Reference Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: #2a5298;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 10px 18px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover {
+            background-color: #f0f4ff;
+            border-color: #a3bffa;
+        }
+        
+        .category-btn.active {
+            background-color: #2a5298;
+            color: white;
+            border-color: #2a5298;
+        }
+        
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .element-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .element-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .element-header {
+            background-color: #2a5298;
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .element-tag {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .element-name {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .element-body {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .element-description {
+            margin-bottom: 20px;
+            color: #555;
+        }
+        
+        .element-example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2a5298;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        
+        .element-demo {
+            border: 1px dashed #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .element-footer {
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .element-category {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .element-status {
+            font-size: 0.9rem;
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .elements-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-code"></i> HTML Elements Reference</h1>
+        <p class="subtitle">Comprehensive guide to HTML elements with descriptions, examples, and live demos. Click on category buttons to filter elements.</p>
+    </header>
+    
+    <div class="container">
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search HTML elements by name, tag, or description...">
+            </div>
+            
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Elements</button>
+                <button class="category-btn" data-category="text">Text</button>
+                <button class="category-btn" data-category="semantic">Semantic</button>
+                <button class="category-btn" data-category="form">Form</button>
+                <button class="category-btn" data-category="media">Media</button>
+            </div>
+        </div>
+        
+        <div class="elements-grid" id="elementsGrid">
+            <!-- Elements will be populated by JavaScript -->
+        </div>
+    </div>
+    
+    <footer class="container">
+        <p>HTML Elements Reference Guide &copy; 2023 | This guide includes examples of commonly used HTML5 elements.</p>
+    </footer>
+    
+    <script>
+        // HTML elements data
+        const htmlElements = [
+            {
+                tag: "<h1> to <h6>",
+                name: "Heading Elements",
+                description: "Defines HTML headings. <h1> is the highest level and <h6> is the lowest.",
+                example: "<h1>Main Heading</h1>\n<h2>Subheading</h2>\n<h3>Section Heading</h3>",
+                demo: "<h3 style='margin:0'>This is a heading example</h3><p>Headings define the structure of your document.</p>",
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<p>",
+                name: "Paragraph",
+                description: "Defines a paragraph of text. Browsers automatically add margin before and after.",
+                example: "<p>This is a paragraph of text that forms a block of content.</p>",
+                demo: "<p>This is a paragraph element. It's used for blocks of text that form logical paragraphs.</p>",
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<a>",
+                name: "Anchor",
+                description: "Creates a hyperlink to other web pages, files, locations, or email addresses.",
+                example: '<a href=\"https://example.com\">Visit Example Website</a>',
+                demo: '<a href=\"#\" style=\"color: #2a5298; text-decoration: none;\">This is a link (hover over me)</a>',
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<div>",
+                name: "Division",
+                description: "A generic container for flow content with no semantic meaning.",
+                example: "<div class=\"container\">\n  <p>Content inside a div</p>\n</div>",
+                demo: "<div style='background-color:#f0f4ff; padding:10px; border-radius:5px;'>This content is inside a &lt;div&gt; container.</div>",
+                category: "semantic",
+                status: "Standard"
+            },
+            {
+                tag: "<span>",
+                name: "Span",
+                description: "A generic inline container for phrasing content with no semantic meaning.",
+                example: "<p>This is <span class=\"highlight\">important</span> text.</p>",
+                demo: "<p>This sentence has <span style='background-color:yellow; padding:2px 5px;'>highlighted text</span> inside a span.</p>",
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<header>",
+                name: "Header",
+                description: "Represents introductory content, typically a group of introductory or navigational aids.",
+                example: "<header>\n  <h1>Website Title</h1>\n  <nav>...</nav>\n</header>",
+                demo: "<div style='background:#f8f9fa; padding:15px; border-radius:5px;'><strong>Header Area</strong><br>Typically contains logo, site title, and navigation.</div>",
+                category: "semantic",
+                status: "Standard"
+            },
+            {
+                tag: "<footer>",
+                name: "Footer",
+                description: "Represents a footer for its nearest sectioning content or sectioning root element.",
+                example: "<footer>\n  <p>&copy; 2023 My Website</p>\n</footer>",
+                demo: "<div style='background:#333; color:white; padding:15px; border-radius:5px; text-align:center;'><strong>Footer Area</strong><br>Typically contains copyright, contact info, and links.</div>",
+                category: "semantic",
+                status: "Standard"
+            },
+            {
+                tag: "<form>",
+                name: "Form",
+                description: "Represents a document section containing interactive controls for submitting information.",
+                example: "<form action=\"/submit\" method=\"post\">\n  <input type=\"text\" name=\"username\">\n  <button type=\"submit\">Submit</button>\n</form>",
+                demo: "<form style='padding:10px; background:#f8f9fa; border-radius:5px;' onsubmit='return false;'><label for='demo'>Sample Input:</label><br><input type='text' id='demo' placeholder='Enter text'><button type='button' style='margin-top:5px; padding:5px 10px; background:#2a5298; color:white; border:none; border-radius:3px;'>Demo Button</button></form>",
+                category: "form",
+                status: "Standard"
+            },
+            {
+                tag: "<input>",
+                name: "Input",
+                description: "Used to create interactive controls for web-based forms. Type attribute defines the kind of input.",
+                example: "<input type=\"text\" placeholder=\"Enter your name\">\n<input type=\"email\" placeholder=\"Enter your email\">\n<input type=\"password\" placeholder=\"Enter your password\">",
+                demo: "<div><input type='text' placeholder='Text input' style='margin-bottom:5px; padding:5px; width:100%;'><br><input type='email' placeholder='Email input' style='margin-bottom:5px; padding:5px; width:100%;'><br><input type='range' style='width:100%;'></div>",
+                category: "form",
+                status: "Standard"
+            },
+            {
+                tag: "<button>",
+                name: "Button",
+                description: "Represents a clickable button that can be used in forms or anywhere in a document.",
+                example: "<button type=\"button\">Click Me</button>\n<button type=\"submit\">Submit Form</button>",
+                demo: "<button style='padding:10px 20px; background:#2a5298; color:white; border:none; border-radius:5px; cursor:pointer;'>Sample Button</button>",
+                category: "form",
+                status: "Standard"
+            },
+            {
+                tag: "<img>",
+                name: "Image",
+                description: "Embeds an image into the document. Requires src attribute with the image URL.",
+                example: "<img src=\"image.jpg\" alt=\"Description of image\">",
+                demo: "<div style='text-align:center; padding:15px; background:#f8f9fa; border-radius:5px;'><div style='width:100px; height:100px; background:#2a5298; color:white; display:inline-flex; align-items:center; justify-content:center; border-radius:5px; margin-bottom:10px;'>Image</div><p>Image placeholder</p></div>",
+                category: "media",
+                status: "Standard"
+            },
+            {
+                tag: "<ul> and <li>",
+                name: "Unordered List",
+                description: "<ul> defines an unordered (bulleted) list. <li> defines each list item.",
+                example: "<ul>\n  <li>First item</li>\n  <li>Second item</li>\n  <li>Third item</li>\n</ul>",
+                demo: "<ul style='padding-left:20px;'><li>Unordered list item 1</li><li>Unordered list item 2</li><li>Unordered list item 3</li></ul>",
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<ol> and <li>",
+                name: "Ordered List",
+                description: "<ol> defines an ordered (numbered) list. <li> defines each list item.",
+                example: "<ol>\n  <li>First item</li>\n  <li>Second item</li>\n  <li>Third item</li>\n</ol>",
+                demo: "<ol style='padding-left:20px;'><li>Ordered list item 1</li><li>Ordered list item 2</li><li>Ordered list item 3</li></ol>",
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<table>",
+                name: "Table",
+                description: "Represents tabular data — information presented in a two-dimensional table.",
+                example: "<table>\n  <tr>\n    <th>Header 1</th>\n    <th>Header 2</th>\n  </tr>\n  <tr>\n    <td>Data 1</td>\n    <td>Data 2</td>\n  </tr>\n</table>",
+                demo: "<table style='width:100%; border-collapse:collapse;'><tr style='background:#2a5298; color:white;'><th style='padding:8px; text-align:left;'>Column 1</th><th style='padding:8px; text-align:left;'>Column 2</th></tr><tr style='border-bottom:1px solid #ddd;'><td style='padding:8px;'>Data A</td><td style='padding:8px;'>Data B</td></tr><tr><td style='padding:8px;'>Data C</td><td style='padding:8px;'>Data D</td></tr></table>",
+                category: "text",
+                status: "Standard"
+            },
+            {
+                tag: "<video>",
+                name: "Video",
+                description: "Embeds a media player which supports video playback into the document.",
+                example: "<video width=\"320\" height=\"240\" controls>\n  <source src=\"movie.mp4\" type=\"video/mp4\">\n  Your browser does not support the video tag.\n</video>",
+                demo: "<div style='background:#333; color:white; padding:30px; text-align:center; border-radius:5px;'>Video Player Placeholder<br><i class='fas fa-play-circle' style='font-size:2rem; margin-top:10px;'></i></div>",
+                category: "media",
+                status: "Standard"
+            }
+        ];
+
+        // DOM elements
+        const elementsGrid = document.getElementById('elementsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+
+        // Initialize with all elements
+        renderElements(htmlElements);
+
+        // Category filter functionality
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Get category
+                const category = button.getAttribute('data-category');
+                
+                // Filter elements
+                let filteredElements;
+                if (category === 'all') {
+                    filteredElements = htmlElements;
+                } else {
+                    filteredElements = htmlElements.filter(element => element.category === category);
+                }
+                
+                // Apply search filter if there's search text
+                const searchText = searchInput.value.toLowerCase();
+                if (searchText) {
+                    filteredElements = filteredElements.filter(element => 
+                        element.tag.toLowerCase().includes(searchText) ||
+                        element.name.toLowerCase().includes(searchText) ||
+                        element.description.toLowerCase().includes(searchText)
+                    );
+                }
+                
+                // Render filtered elements
+                renderElements(filteredElements);
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            const searchText = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
+            
+            // Start with all elements or category filtered
+            let filteredElements;
+            if (activeCategory === 'all') {
+                filteredElements = htmlElements;
+            } else {
+                filteredElements = htmlElements.filter(element => element.category === activeCategory);
+            }
+            
+            // Apply search filter
+            if (searchText) {
+                filteredElements = filteredElements.filter(element => 
+                    element.tag.toLowerCase().includes(searchText) ||
+                    element.name.toLowerCase().includes(searchText) ||
+                    element.description.toLowerCase().includes(searchText)
+                );
+            }
+            
+            // Render filtered elements
+            renderElements(filteredElements);
+        });
+
+        // Function to render elements to the grid
+        function renderElements(elements) {
+            if (elements.length === 0) {
+                elementsGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No elements found</h3>
+                        <p>Try a different search term or category</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            elementsGrid.innerHTML = elements.map(element => `
+                <div class="element-card">
+                    <div class="element-header">
+                        <div class="element-tag">${element.tag}</div>
+                        <div class="element-name">${element.name}</div>
+                    </div>
+                    <div class="element-body">
+                        <div class="element-description">${element.description}</div>
+                        <div class="element-example">${element.example}</div>
+                        <div class="element-demo">${element.demo}</div>
+                    </div>
+                    <div class="element-footer">
+                        <span class="element-category">${element.category}</span>
+                        <span class="element-status">${element.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
